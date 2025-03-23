@@ -24,8 +24,8 @@ int main() {
   while (1) {
     printf( "Enter a choice:\n" \
       "  0  Print the array of grades\n" \
-      "  1  Find the maximum grade\n" \
-      "  2  Find the minimum grade\n" \
+      "  1  Find the minimum grade\n" \
+      "  2  Find the maximum grade\n" \
       "  3  Print the average on all tests for each student\n" \
       "  4  End program\n" \
       "? ");
@@ -77,10 +77,17 @@ void minimum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
 
   int minimum = grades[0][0];
 
-  for (size_t current_student = 0; current_student < num_students; current_student++) {
-    for (size_t current_grade = 0; current_grade < num_grades; current_grade++) {
-      if (grades[current_student][current_grade] < minimum)
-        minimum = grades[current_student][current_grade];
+  /*
+    Since grades is a multidimensional array, which stores all elements in a
+    contiguous format, we can just find the address of the first and last
+    element and just traverse the array until we reach the last element.
+  */
+  int *current_grade = grades[0];
+  int *last_grade = grades[num_students - 1] + num_grades - 1;
+
+  while (current_grade <= last_grade) {
+    if (*current_grade++ < minimum) {
+      minimum = *(current_grade - 1);
     }
   }
 
@@ -95,10 +102,17 @@ void maximum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
 
   int maximum = grades[0][0];
 
-  for (size_t current_student = 0; current_student < num_students; current_student++) {
-    for (size_t current_grade = 0; current_grade < num_grades; current_grade++) {
-      if (grades[current_student][current_grade] > maximum)
-        maximum = grades[current_student][current_grade];
+  /*
+    Since grades is a multidimensional array, which stores all elements in a
+    contiguous format, we can just find the address of the first and last
+    element and just traverse the array until we reach the last element.
+  */
+  int *current_grade = grades[0];
+  int *last_grade = grades[num_students - 1] + num_grades - 1;
+
+  while (current_grade <= last_grade) {
+    if (*current_grade++ > maximum) {
+      maximum = *(current_grade - 1);
     }
   }
 
