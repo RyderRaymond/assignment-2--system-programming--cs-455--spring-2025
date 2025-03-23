@@ -9,6 +9,30 @@ int ascending(int first, int second);
 int descending(int first, int second);
 
 int main() {
+  int choice = -1;
+  int (*comparison_function) (int, int);
+  char *comparison_string = "invalid";
+
+  printf( "Enter 1 to sort in ascending order\n" \
+          "Enter 2 to sort in descending order\n" \
+          "Your choice: ");
+
+  scanf("%d", &choice);
+  printf("\n");
+
+  switch (choice) {
+    case 1:
+      comparison_function = ascending;
+      comparison_string = "ascending";
+      break;
+    case 2:
+      comparison_function = descending;
+      comparison_string = "descending";
+      break;
+    default:
+      printf("Invalid option.");
+      return 1; //return error status code
+  }
 
   printf("Data items in original order\n");
 
@@ -16,14 +40,15 @@ int main() {
     printf("%5d", a[i]);
   printf("\n");
 
-  bubble_sort(descending, a, SIZE);
+  bubble_sort(comparison_function, a, SIZE);
 
-  printf("Data items in sorted order\n");
+  printf("Data items in %s order\n", comparison_string);
 
   for (int i = 0; i < SIZE; i++)
     printf("%5d", a[i]);
-  printf("\n");
+  printf("\n\n");
 
+  return 0;
 }
 
 /** @brief Bubble sort algorithm sorts the array numbers either ascending
