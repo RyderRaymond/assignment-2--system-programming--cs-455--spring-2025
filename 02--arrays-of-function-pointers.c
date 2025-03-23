@@ -1,7 +1,8 @@
 #include <stdio.h>
 
-#define STUDENTS  3
-#define EXAMS     4
+#define STUDENTS    3
+#define EXAMS       4
+#define END_PROGRAM 4
 
 void printArray(int [][EXAMS], size_t, size_t);
 void minimum(int [][EXAMS], size_t, size_t);
@@ -37,19 +38,22 @@ int main() {
       return 1;
     }
 
-    if (choice == 4) {
+    if (choice == END_PROGRAM) {
       printf("Program Ended.\n");
       return 0;
     }
 
+    //Call the function associated with this choice
     (*processGrades[choice]) (studentGrades, STUDENTS, EXAMS);
   }
+
   return 1; //user should return using option 4: end program
 }
 
 void printArray(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   printf("                 ");
 
+  //Print array indices above where grades will be printed
   for (int more_grades = num_grades; more_grades > 0; )
     printf("[%lu]     ", num_grades - more_grades--);
   printf("\n");
