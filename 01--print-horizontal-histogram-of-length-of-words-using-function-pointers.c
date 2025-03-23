@@ -58,24 +58,28 @@ int main() {
  *
  *  @param comparison_function  The function that compares to determine if a swap must be done.
  *  @param numbers  The array to sort.
- *  @param size The size of the array numbers.
+ *  @param numbers_size The size of the array numbers.
  */
-void bubble_sort(int (*comparison_function) (int, int), int numbers[], int size) {
+void bubble_sort(int (*comparison_function) (int, int), int numbers[], int numbers_size) {
   int swapped = 0;
 
   do {
     swapped = 0;
 
     //Loop through all elements, comparing and swapping if necessary
-    for (int i = 0; i < size - 1; i++) {
+    for (int i = 0; i < numbers_size - 1; i++) {
+      //if the comparison determines we need to swap
       if ((*comparison_function) (numbers[i], numbers[i + 1])) {
+        //swap
         int temp = numbers[i];
         numbers[i] = numbers[i + 1];
         numbers[i + 1] = temp;
+
+        //swap occurred this pass through: ie. array may not be sorted
         swapped = 1;
       }
     }
-  } while (swapped); //Takes one extra pass to know the array is sorted
+  } while (swapped); //Takes one extra pass to know the array is sorted (no swap occurred)
 
   return;
 }
@@ -88,6 +92,7 @@ void bubble_sort(int (*comparison_function) (int, int), int numbers[], int size)
 int ascending(int first, int second) {
   return first > second;
 }
+
 /** @brief descending returns 1 if a swap must be done to sort in descending order.
  *  @param first  The element that comes first in the array.
  *  @param second The element that comes second in the array.
