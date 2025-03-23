@@ -80,7 +80,7 @@ void minimum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
     }
   }
 
-  printf("The lowest grade is %d\n", minimum);
+  printf("The lowest grade is %d\n\n", minimum);
 }
 
 void maximum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
@@ -98,7 +98,7 @@ void maximum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
     }
   }
 
-  printf("The highest grade is %d\n", maximum);
+  printf("The highest grade is %d\n\n", maximum);
 }
 
 void average(int grades[][EXAMS], size_t num_students, size_t num_grades) {
@@ -109,7 +109,7 @@ void average(int grades[][EXAMS], size_t num_students, size_t num_grades) {
       sum += grades[current_student][current_grade];
     }
 
-    printf("The average for student %lu is %f\n", (current_student + 1), (sum / (double) num_grades));
+    printf("The average for student %lu is %.1f\n", (current_student + 1), (sum / (double) num_grades));
   }
   printf("\n");
 }
