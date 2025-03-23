@@ -19,10 +19,10 @@ int main() {
     {printArray, minimum, maximum, average};
 
   printf( "Enter a choice:\n" \
-          "\t0\tPrint the array of grades\n" \
-          "\t1\tFind the maximum grade\n" \
-          "\t2\tPrint the average on all tests for each student\n" \
-          "\t4\tEnd program\n" \
+          "  0  Print the array of grades\n" \
+          "  1  Find the maximum grade\n" \
+          "  2  Print the average on all tests for each student\n" \
+          "  4  End program\n" \
           "? ");
 
   int choice = -1;
@@ -36,6 +36,11 @@ int main() {
       return 1;
     }
 
+    if (choice == 4) {
+      printf("Program Ended.\n");
+      return 0;
+    }
+
     (*processGrades[choice]) (studentGrades, STUDENTS, EXAMS);
   }
   return 1; //user should return using option 4: end program
@@ -45,11 +50,11 @@ void printArray(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   printf("          ");
 
   for (int more_grades = num_grades; more_grades > 0;)
-    printf("[%d]  ", num_grades - more_grades);
+    printf("[%lu]  ", num_grades - more_grades);
   printf("\n");
 
   for (size_t current_student = 0; current_student < num_students; current_student++) {
-    printf("studentGrades[%d]\t", current_student);
+    printf("studentGrades[%lu]\t", current_student);
 
     for (size_t current_grade = 0; current_grade < num_grades; current_grade++) {
       printf("%5d", grades[current_student][current_grade]);
@@ -62,10 +67,10 @@ void printArray(int grades[][EXAMS], size_t num_students, size_t num_grades) {
 void minimum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   if (num_students < 1 || num_grades < 1) {
     printf("No grades inputted\n");
-    return 1;
+    return;
   }
 
-  int minimum = grades[0, 0];
+  int minimum = grades[0][0];
 
   for (size_t current_student = 0; current_student < num_students; current_student++) {
     for (size_t current_grade = 0; current_grade < num_grades; current_grade++) {
@@ -80,10 +85,10 @@ void minimum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
 void maximum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   if (num_students < 1 || num_grades < 1) {
     printf("No grades inputted\n");
-    return 1;
+    return;
   }
 
-  int maximum = grades[0, 0];
+  int maximum = grades[0][0];
 
   for (size_t current_student = 0; current_student < num_students; current_student++) {
     for (size_t current_grade = 0; current_grade < num_grades; current_grade++) {
@@ -103,7 +108,7 @@ void average(int grades[][EXAMS], size_t num_students, size_t num_grades) {
       sum += grades[current_student][current_grade];
     }
 
-    printf("The average for student %d is %f\n", (current_student + 1), (sum / (double) num_grades));
+    printf("The average for student %lu is %f\n", (current_student + 1), (sum / (double) num_grades));
   }
   printf("\n");
 }
