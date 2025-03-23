@@ -18,16 +18,17 @@ int main() {
   void (*processGrades[4])(int [][EXAMS], size_t, size_t) =
     {printArray, minimum, maximum, average};
 
-  printf( "Enter a choice:\n" \
-          "  0  Print the array of grades\n" \
-          "  1  Find the maximum grade\n" \
-          "  2  Print the average on all tests for each student\n" \
-          "  4  End program\n" \
-          "? ");
-
   int choice = -1;
 
   while (1) {
+    printf( "Enter a choice:\n" \
+      "  0  Print the array of grades\n" \
+      "  1  Find the maximum grade\n" \
+      "  2  Find the minimum grade\n" \
+      "  3  Print the average on all tests for each student\n" \
+      "  4  End program\n" \
+      "? ");
+
     scanf("%d", &choice);
     printf("\n");
 
@@ -47,17 +48,17 @@ int main() {
 }
 
 void printArray(int grades[][EXAMS], size_t num_students, size_t num_grades) {
-  printf("          ");
+  printf("                 ");
 
-  for (int more_grades = num_grades; more_grades > 0;)
-    printf("[%lu]  ", num_grades - more_grades);
+  for (int more_grades = num_grades; more_grades > 0; )
+    printf("[%lu]     ", num_grades - more_grades--);
   printf("\n");
 
   for (size_t current_student = 0; current_student < num_students; current_student++) {
-    printf("studentGrades[%lu]\t", current_student);
+    printf("studentGrades[%lu] ", current_student);
 
     for (size_t current_grade = 0; current_grade < num_grades; current_grade++) {
-      printf("%5d", grades[current_student][current_grade]);
+      printf("%-8d", grades[current_student][current_grade]);
     }
     printf("\n");
   }
