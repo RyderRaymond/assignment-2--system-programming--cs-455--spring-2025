@@ -24,8 +24,8 @@ int main() {
   while (1) {
     printf( "Enter a choice:\n" \
       "  0  Print the array of grades\n" \
-      "  1  Find the maximum grade\n" \
-      "  2  Find the minimum grade\n" \
+      "  1  Find the minimum grade\n" \
+      "  2  Find the maximum grade\n" \
       "  3  Print the average on all tests for each student\n" \
       "  4  End program\n" \
       "? ");
