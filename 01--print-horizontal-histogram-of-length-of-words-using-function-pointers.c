@@ -8,6 +8,9 @@ void bubble_sort(int (*comparison_function) (int, int), int numbers[], int size)
 int ascending(int first, int second);
 int descending(int first, int second);
 
+/** @brief Main asks if the user wants to sort the array in ascending or descending order,
+ *         then prints the original array and the sorted one based on the user input.
+ */
 int main() {
   int choice = -1;
   int (*comparison_function) (int, int);

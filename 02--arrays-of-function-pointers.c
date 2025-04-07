@@ -15,6 +15,9 @@ int studentGrades[STUDENTS][EXAMS] = {
   {70, 90, 86, 81}
 };
 
+/** @brief Main repeatedly asks the user for an option and either exits or
+ *         calls the associated function.
+ */
 int main() {
   void (*processGrades[4])(int [][EXAMS], size_t, size_t) =
     {printArray, minimum, maximum, average};
@@ -60,12 +63,18 @@ int main() {
   return 1; //user should return using option 4: end program
 }
 
+/** @brief printArray prints the multidimensional array with array indices above columns
+ *
+ *  @param grades         The multidimensional array of grades
+ *  @param num_students   The number of rows, which represent students
+ *  @param num_grades     The number of columns per row, representing student grades
+ */
 void printArray(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   printf("                 ");
 
   //Print array indices above where grades will be printed
-  for (int more_grades = num_grades; more_grades > 0; ) {
-    printf("[%lu]     ", num_grades - more_grades--);
+  for (size_t current_grade_index = 0; current_grade_index < num_grades; ) {
+    printf("[%lu]     ", current_grade_index++);
   }
   printf("\n");
 
@@ -81,6 +90,12 @@ void printArray(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   printf("\n");
 }
 
+/** @brief minimum finds and prints the smallest grade among all students
+ *
+ *  @param grades         The multidimensional array of grades
+ *  @param num_students   The number of rows, which represent students
+ *  @param num_grades     The number of columns per row, representing student grades
+ */
 void minimum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   if (num_students < 1 || num_grades < 1) {
     printf("No grades inputted\n");
@@ -107,6 +122,12 @@ void minimum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   printf("The lowest grade is %d\n\n", minimum);
 }
 
+/** @brief maximum finds and prints the highest grade among all students
+ *
+ *  @param grades         The multidimensional array of grades
+ *  @param num_students   The number of rows, which represent students
+ *  @param num_grades     The number of columns per row, representing student grades
+ */
 void maximum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   if (num_students < 1 || num_grades < 1) {
     printf("No grades inputted\n");
@@ -116,11 +137,6 @@ void maximum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
 
   int maximum = grades[0][0];
 
-  /*
-    Since grades is a multidimensional array, which stores all elements in a
-    contiguous format, we can just find the address of the first and last
-    element and just traverse the array until we reach the last element.
-  */
   int *current_grade = grades[0];
   int *last_grade = grades[num_students - 1] + num_grades - 1;
 
@@ -133,6 +149,12 @@ void maximum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   printf("The highest grade is %d\n\n", maximum);
 }
 
+/** @brief average finds and prints the average of all grades for each student
+ *
+ *  @param grades         The multidimensional array of grades
+ *  @param num_students   The number of rows, which represent students
+ *  @param num_grades     The number of columns per row, representing student grades
+ */
 void average(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   for (size_t current_student = 0; current_student < num_students; current_student++) {
     int sum = 0;
