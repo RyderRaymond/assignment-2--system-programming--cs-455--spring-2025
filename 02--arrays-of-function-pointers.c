@@ -20,6 +20,7 @@ int main() {
     {printArray, minimum, maximum, average};
 
   int choice = -1;
+  int scanf_status = 0;
 
   while (1) {
     printf( "Enter a choice:\n" \
@@ -30,16 +31,25 @@ int main() {
       "  4  End program\n" \
       "? ");
 
-    scanf("%d", &choice);
+    scanf_status = scanf("%d", &choice);
     printf("\n");
 
-    if (choice < 0 || choice > 4) {
-      printf("Invalid option: %d\n", choice);
+    // Scanf did not read a valid integer
+    if (EOF == scanf_status || 0 == scanf_status) {
+      printf("Enter a number\n");
+
       return 1;
     }
 
-    if (choice == END_PROGRAM) {
+    if (choice < 0 || choice > 4) {
+      printf("Invalid option: %d\n\n", choice);
+
+      continue;
+    }
+
+    if (END_PROGRAM == choice) {
       printf("Program Ended.\n");
+
       return 0;
     }
 
@@ -54,8 +64,9 @@ void printArray(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   printf("                 ");
 
   //Print array indices above where grades will be printed
-  for (int more_grades = num_grades; more_grades > 0; )
+  for (int more_grades = num_grades; more_grades > 0; ) {
     printf("[%lu]     ", num_grades - more_grades--);
+  }
   printf("\n");
 
   for (size_t current_student = 0; current_student < num_students; current_student++) {
@@ -64,6 +75,7 @@ void printArray(int grades[][EXAMS], size_t num_students, size_t num_grades) {
     for (size_t current_grade = 0; current_grade < num_grades; current_grade++) {
       printf("%-8d", grades[current_student][current_grade]);
     }
+
     printf("\n");
   }
   printf("\n");
@@ -72,6 +84,7 @@ void printArray(int grades[][EXAMS], size_t num_students, size_t num_grades) {
 void minimum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   if (num_students < 1 || num_grades < 1) {
     printf("No grades inputted\n");
+
     return;
   }
 
@@ -97,6 +110,7 @@ void minimum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
 void maximum(int grades[][EXAMS], size_t num_students, size_t num_grades) {
   if (num_students < 1 || num_grades < 1) {
     printf("No grades inputted\n");
+
     return;
   }
 
